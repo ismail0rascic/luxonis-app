@@ -1,0 +1,25 @@
+version: '3'
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+    environment:
+      - PORT=80
+      - BASE_URL=http://backend:80
+      - USER=ancclnfo
+      - HOST=horton.db.elephantsql.com
+      - DATABASE=ancclnfo
+      - PASSWORD=SgBxFycD7Tf_Qsu5j8VBPTnwmvch-eK7
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    environment:
+      - REACT_APP_BASE_URL=http://backend:80
+    ports:
+      - 8080:8080
+    depends_on:
+      - backend
